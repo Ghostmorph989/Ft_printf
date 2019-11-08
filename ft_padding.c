@@ -31,7 +31,8 @@ char       *ft_fill(int left_v, int right_v)
         s = (char *)malloc(sizeof(char) * (left_v + 1));
         s[left_v] = '\0';
         s = ft_memset(s , '0', left_v);
-        s = ft_memset(s, ' ', left_v - right_v);
+        if (right_v != 0)
+            s = ft_memset(s, ' ', left_v - right_v);
     }
     return (s);
 }
