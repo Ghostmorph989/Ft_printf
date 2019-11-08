@@ -13,17 +13,43 @@
 #include "libftprintf.h"
 
 
+void	ft_precision(char *str, char *p)
+{
+	int len;
+	int s_len;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	s_len = ft_strlen(str);
+	len = ft_strlen(p);
+	if (s_len > len)
+		ft_putstr_fd(str, 1);
+	else
+	{
+		i = len - s_len;
+		while (i < len)
+		{
+			p[i] = str[j];
+			i++;
+			j++;
+		}
+		ft_putstr_fd(p, 1);
+	}
+}
 
 int		ft_printf(const char *s, ...)
 {
 	char	*str;
 	int		i;
-	int		j;
+	char 	*p;
 	va_list list;
 	va_start(list, s);
+	int flag;
 
 	i = 0;
-	j = 0;
+	flag = 0;
 	str = ft_strdup(s);
 	while (str[i] != '\0')
 	{
@@ -34,10 +60,24 @@ int		ft_printf(const char *s, ...)
 			i++;
 			if (s[i] == '0')
 			{
-				ft_flagzero((char *)s, i, &j);
-				i = j + 1;
+				p = ft_flagzero((char *)s, i, &i);
+			/*if (s[i] == 'c')
+				ft_putchar_fd(va_arg(list, int), 1);
+			if (s[i] == 's')
+				ft_putstr_fd(va_arg(list, char *), 1);
+				*/
+				if (s[i] == 'd' || str[i] == 'i')
+					ft_precision(ft_itoa(va_arg(list, int)), p);
+				if (s[i] == 'u')
+					ft_precision(ft_itoa(va_arg(list, unsigned int)), p);
+				if (s[i] == 'x')
+					ft_precision(ft_hex(va_arg(list, long long)), p);
+				if (s[i] == 'X')
+					ft_precision(ft_upper(ft_hex(va_arg(list, long long))), p);	
+				if (s[i] == 'p')	
+					ft_precision(ft_strjoin("0x", ft_hex(va_arg(list, long long))), p);
 			}
-			if (s[i] == 'c')
+			/*if (s[i] == 'c')
 				ft_putchar_fd(va_arg(list, int), 1);
 			if (s[i] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
@@ -51,7 +91,7 @@ int		ft_printf(const char *s, ...)
 				ft_putstr_fd(ft_upper(ft_hex(va_arg(list, long long))), 1);	
 			if (s[i] == 'p')	
 				ft_putstr_fd(ft_strjoin("0x", ft_hex(va_arg(list, long long))), 1);
-	
+			*/
 		}
 		else if (s[i] != '%')
 			ft_putchar_fd(s[i], 1);

@@ -22,7 +22,7 @@ int			ft_len(long long nb);
 char		*ft_upper(char *str);
 char		*ft_hex(long long nb);
 int			ft_printf(const char *s, ...);
-void        ft_flagzero(char *str, int i, int *holder);
-void        ft_fill(int left_v, int right_v);
+char        *ft_flagzero(char *str, int i, int *holder);
+char        *ft_fill(int left_v, int right_v);
 #endif
 

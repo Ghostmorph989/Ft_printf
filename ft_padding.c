@@ -13,7 +13,7 @@
 
 #include "libftprintf.h"
 
-void        ft_fill(int left_v, int right_v)
+char       *ft_fill(int left_v, int right_v)
 {
     char *s;
     int i;
@@ -29,25 +29,22 @@ void        ft_fill(int left_v, int right_v)
     {
         s = (char *)malloc(sizeof(char) * (left_v + 1));
         s = ft_memset(s, '0', left_v);
-         s = ft_memset(s, ' ', left_v - right_v);
+        s = ft_memset(s, ' ', left_v - right_v);
     }
-
-   /* while (s[i] != '\0' && )
-    {
-
-    }*/
-    printf("%s\n", s);
+    return (s);
 }
 
-void        ft_flagzero(char *str, int i, int *holder)
+char        *ft_flagzero(char *str, int i, int *holder)
 {
     int     left_v;
     int     right_v;
     char    *s;
+    char    *p;
 
     left_v = 0;
     right_v = 0;
     s = NULL;
+    p = NULL;
     if (str[i] == '0')
     {
         left_v = ft_atoi(str + i);
@@ -56,8 +53,10 @@ void        ft_flagzero(char *str, int i, int *holder)
         if (str[i] == '.')
             i++;
         right_v = ft_atoi(str + i);
-        printf("\n%d || %d\n", left_v, right_v);
-        ft_fill(left_v, right_v);
+        while (ft_isdigit(str[i]) && str[i] != '\0')
+            i++;
+        p = ft_fill(left_v, right_v);
     }
-    *holder = i + 1;
+    *holder = i;
+    return (p);
 }
