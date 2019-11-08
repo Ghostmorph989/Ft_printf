@@ -30,8 +30,8 @@ char       *ft_fill(int left_v, int right_v)
     {
         s = (char *)malloc(sizeof(char) * (left_v + 1));
         s[left_v] = '\0';
+        s = ft_memset(s , '0', left_v);
         s = ft_memset(s, ' ', left_v - right_v);
-        s = ft_memset(s, '0', left_v);
     }
     return (s);
 }
@@ -40,7 +40,7 @@ int         ft_advanced_isdigit(char *str, int i)
 {
     while (ft_isdigit(str[i]) && str[i] != '\0')
             i++;
-            return (i);
+        return (i);
 }
 
 int         ft_getnum(char *str, int i)
