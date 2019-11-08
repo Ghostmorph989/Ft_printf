@@ -6,14 +6,15 @@
 #    By: malaoui <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 17:35:50 by malaoui           #+#    #+#              #
-#    Updated: 2019/11/06 18:03:40 by malaoui          ###   ########.fr        #
+#    Updated: 2019/11/07 14:11:46 by malaoui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC = ft_printf.c\
-	 ft_base.c 
+	ft_base.c\
+	ft_padding.c
 
 LIB = libft.a
 

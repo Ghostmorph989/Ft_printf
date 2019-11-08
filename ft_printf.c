@@ -12,61 +12,6 @@
 
 #include "libftprintf.h"
 
-void	ft_check_specify(int fs0, int fs1)
-{
-	int i;
-
-	i = fs0 - fs1;
-	while (i)
-	{
-		ft_putchar_fd(' ', 1);
-		i--;
-	}
-	//	ft_putstr_fd(va_arg(list, char *), 1);
-	/*
-	if (str[i] == 'd' || str[i] == 'i')
-	{
-		ft_putstr_fd(ft_itoa(va_arg(list, int)), 1);
-	}
-	if (str[i] == 'u')
-		ft_putstr_fd(ft_itoa(va_arg(list, unsigned int)), 1);
-	if (str[i] == 'x')
-		ft_putstr_fd(ft_hex(va_arg(list, long long)), 1);
-	if (str[i] == 'X')
-		ft_putstr_fd(ft_upper(ft_hex(va_arg(list, long long))), 1);
-		*/
-}
-
-
-void	ft_check_params(char *str, va_list list, int i)
-{
-	int fs0;
-	int fs1;
-
-	fs0 = 0;p
-	fs1 = 0;
-	if (str[i] == '*' || ft_isdigit(str[i]))
-	{
-		if (str[i] == '*')
-			fs0 = va_arg(list, int);
-		else
-			fs0 = ft_atoi(&str[i]);
-		i++;
-		if (str[i] == '.')
-			i++;
-		if (str[i] == '*' || ft_isdigit(str[i]))
-		{
-			if (str[i] == '*')
-				fs1 = va_arg(list, int);
-			else
-				fs1 = ft_atoi(&str[i]);
-			i++;
-		}
-		ft_check_specify(fs0, fs1);
-	}
-}
-
-
 
 
 int		ft_printf(const char *s, ...)
@@ -79,30 +24,38 @@ int		ft_printf(const char *s, ...)
 
 	i = 0;
 	j = 0;
-	str= ft_strdup(s);
+	str = ft_strdup(s);
 	while (str[i] != '\0')
 	{
-		if ((str[i] != '%' || (str[i] == '%' && str[i + 1] == '%')) && str[i] != '\0')
-			ft_putchar_fd(str[i], 1);
-		else if (str[i] == '%')
+		if (s[i] == '%')
 		{
+			if (s[i] == '%' && s[i + 1] == '%')
+				ft_putchar_fd(s[i], 1);
 			i++;
-			ft_check_params(str, list, i++);
-			if (str[i] == 'c')
+			if (s[i] == '0')
+			{
+				ft_flagzero((char *)s, i, &j);
+				i = j + 1;
+			}
+			if (s[i] == 'c')
 				ft_putchar_fd(va_arg(list, int), 1);
-			if (str[i] == 's')
+			if (s[i] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
-			if (str[i] == 'd' || str[i] == 'i')
+			if (s[i] == 'd' || str[i] == 'i')
 				ft_putstr_fd(ft_itoa(va_arg(list, int)), 1);
-			if (str[i] == 'u')
+			if (s[i] == 'u')
 				ft_putstr_fd(ft_itoa(va_arg(list, unsigned int)), 1);
-			if (str[i] == 'x')
+			if (s[i] == 'x')
 				ft_putstr_fd(ft_hex(va_arg(list, long long)), 1);
-			if (str[i] == 'X')
+			if (s[i] == 'X')
 				ft_putstr_fd(ft_upper(ft_hex(va_arg(list, long long))), 1);	
-			if (str[i] == 'p')	
+			if (s[i] == 'p')	
 				ft_putstr_fd(ft_strjoin("0x", ft_hex(va_arg(list, long long))), 1);
+	
 		}
+		else if (s[i] != '%')
+			ft_putchar_fd(s[i], 1);
+
 		i++;
 	}
 	va_end(list);

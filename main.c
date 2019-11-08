@@ -15,11 +15,12 @@
 
 int		main(void)
 {
-//	int a = 9999;
+	int a = 9999;
 
-	printf("/***********************************************\\\n");
-	printf("<%5s>\n", "dddfasfasgaga");
-	printf("/***********************************************\\\n");
-	ft_printf("<%5s>\n", "dddfasfasgaga");
+	//printf("/***********************************************\\\n");
+	//printf("Keep your head strong : %015.16d", 42545245);
+	//printf("/***********************************************\\\n");
+	ft_printf("Keep your head strong :%016.15X \n", a);
+	printf("Keep your head strong :%016.15X \n", a);
 	return (0);
 }
