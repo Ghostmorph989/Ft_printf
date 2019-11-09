@@ -14,7 +14,8 @@ NAME = libftprintf.a
 
 SRC = ft_printf.c\
 	ft_base.c\
-	ft_padding.c
+	ft_padding.c\
+	ft_precision.c
 
 LIB = libft.a
 

@@ -13,58 +13,6 @@
 #include "libftprintf.h"
 
 
-void	ft_precision(char *str, char *p, int flag)
-{
-	int len;
-	int s_len;
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	s_len = ft_strlen(str);
-	if (!p)
-		ft_strdup("");
-	len = ft_strlen(p);
-	//printf("%s\n", str + i);
-	//printf("flag : %d\n", flag);
-	//printf("%s\n", str);
-	if (flag == 1)
-	{
-		if (s_len > len && len >= 0)
-			ft_putstr_fd(str, 1);
-		else if (len > s_len)
-		{
-			if (str[i] == '-')
-			{
-				ft_putchar_fd('-', 1);
-				i++;
-				j++;
-			}
-			i = len - s_len;
-			while (i < len)
-			{
-				p[i] = str[j];
-				i++;
-				j++;
-			}
-			p[i] = '\0';
-			ft_putstr_fd(p, 1);
-		}
-	}
-	else if (flag == 0)
-	{
-		if (s_len >= len)
-			ft_putstr_fd(str, 1);
-		else if (len > s_len)
-		{
-			i = len - s_len;
-			p = ft_substr(str, 0, i);
-			ft_putstr_fd(p, 1);
-		}
-	}
-}
-
 int		ft_printf(const char *s, ...)
 {
 	char	*str;
@@ -87,39 +35,33 @@ int		ft_printf(const char *s, ...)
 			if (s[i] == '0')
 			{
 				p = ft_flagzero((char *)s, i, &i);
-				flag = 1;
 			/*if (s[i] == 'c')
 				ft_putchar_fd(va_arg(list, int), 1);
 			if (s[i] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
 				*/
 				if (s[i] == 'd' || str[i] == 'i')
-					ft_precision(ft_itoa(va_arg(list, int)), p, flag);
+					ft_precision_flag(ft_itoa(va_arg(list, int)), p);
 				if (s[i] == 'u')
-					ft_precision(ft_itoa(va_arg(list, unsigned int)), p, flag);
+					ft_precision_flag(ft_itoa(va_arg(list, unsigned int)), p);
 				if (s[i] == 'x')
-					ft_precision(ft_hex(va_arg(list, long long)), p, flag);
+					ft_precision_flag(ft_hex(va_arg(list, long long)), p);
 				if (s[i] == 'X')
-					ft_precision(ft_upper(ft_hex(va_arg(list, long long))), p, flag);	
+					ft_precision_flag(ft_upper(ft_hex(va_arg(list, long long))), p);	
 				if (s[i] == 'p')	
-					ft_precision(ft_strjoin("0x", ft_hex(va_arg(list, long long))), p, flag);
+					ft_precision_flag(ft_strjoin("0x", ft_hex(va_arg(list, long long))), p);
+					i++;
 			}
 			if (s[i] == '.')
-			{
-				flag = 1;
 				i++;
-			}
 			if (ft_isdigit(s[i]) == 1)
-			{
 				p = ft_width_precision(str, i, &i);
-				flag = 1;
-			}
 			if (s[i] == 'c')
 				ft_putchar_fd(va_arg(list, int), 1);
 			if (s[i] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
 			if (s[i] == 'd' || str[i] == 'i')
-				ft_precision(ft_itoa(va_arg(list, int)), p, flag);
+				ft_precision(ft_itoa(va_arg(list, int)), p);
 			if (s[i] == 'u')
 				ft_putstr_fd(ft_itoa(va_arg(list, unsigned int)), 1);
 			if (s[i] == 'x')
@@ -130,7 +72,7 @@ int		ft_printf(const char *s, ...)
 				ft_putstr_fd(ft_strjoin("0x", ft_hex(va_arg(list, long long))), 1);
 		
 		}
-		else if (s[i] != '%')
+		if (s[i] != '%')
 			ft_putchar_fd(s[i], 1);
 
 		i++;

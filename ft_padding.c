@@ -31,7 +31,7 @@ char       *ft_fill(int left_v, int right_v)
         s = (char *)malloc(sizeof(char) * (left_v + 1));
         s[left_v] = '\0';
         s = ft_memset(s , '0', left_v);
-        if (right_v == 0)
+        if (right_v != 0)
             s = ft_memset(s, ' ', left_v - right_v);
     }
     return (s);
@@ -61,10 +61,12 @@ char        *ft_width_precision(char *str, int i, int *holder)
     s = ft_strdup("");;
     p = ft_strdup("");;
     left_v = ft_getnum(str, i);
+    //printf("%d\n", left_v);
     i = ft_advanced_isdigit(str, i);
     if (str[i] == '.')
         i++;
     right_v = ft_getnum(str, i);
+    //printf("%d\n", right_v);
     i = ft_advanced_isdigit(str, i);
     p = ft_fill(left_v, right_v);
     *holder = i;
@@ -76,10 +78,12 @@ char        *ft_flagzero(char *str, int i, int *holder)
     char *p;
 
     p = ft_strdup("");
+    //printf("%d\n", i);
     if (str[i] == '0')
     {
         p = ft_width_precision(str, i, holder);
     }
-    *holder = i;
+    i = *holder;
+    //printf("%d\n", i);
     return (p);
 }
