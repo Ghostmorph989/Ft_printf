@@ -13,6 +13,29 @@
 
 #include "libftprintf.h"
 
+char       *ft_fill_flag(int left_v, int right_v)
+{
+    char *s;
+    int i;
+
+    i = 0;
+    s = NULL;
+    if (right_v >= left_v)
+    {
+        s = (char *)malloc(sizeof(char) * (right_v + 1));
+        s[right_v] = '\0';
+        s = ft_memset(s, '0', right_v);
+    }
+    else if (left_v > right_v)
+    {
+        s = (char *)malloc(sizeof(char) * (left_v + 1));
+        s[left_v] = '\0';
+        s = ft_memset(s, ' ', left_v - right_v);
+        s = ft_memset(s , '0', left_v);
+    }
+    return (s);
+}
+
 char       *ft_fill(int left_v, int right_v)
 {
     char *s;
@@ -31,8 +54,7 @@ char       *ft_fill(int left_v, int right_v)
         s = (char *)malloc(sizeof(char) * (left_v + 1));
         s[left_v] = '\0';
         s = ft_memset(s , '0', left_v);
-        if (right_v != 0)
-            s = ft_memset(s, ' ', left_v - right_v);
+        s = ft_memset(s, ' ', left_v - right_v);
     }
     return (s);
 }
@@ -70,6 +92,32 @@ char        *ft_width_precision(char *str, int i, int *holder)
     i = ft_advanced_isdigit(str, i);
     p = ft_fill(left_v, right_v);
     *holder = i;
+    //printf("line = <%s>\n", str + i);
+    return (p);
+}
+
+char        *ft_width_precision_flag(char *str, int i, int *holder)
+{
+    int     left_v;
+    int     right_v;
+    char    *s;
+    char    *p;
+
+    left_v = 0;
+    right_v = 0;
+    s = ft_strdup("");;
+    p = ft_strdup("");;
+    left_v = ft_getnum(str, i);
+    //printf("%d\n", left_v);
+    i = ft_advanced_isdigit(str, i);
+    if (str[i] == '.')
+        i++;
+    right_v = ft_getnum(str, i);
+    //printf("%d\n", right_v);
+    i = ft_advanced_isdigit(str, i);
+    p = ft_fill(left_v, right_v);
+    *holder = i;
+    //printf("line = <%s>\n", str + i);
     return (p);
 }
 
@@ -81,7 +129,7 @@ char        *ft_flagzero(char *str, int i, int *holder)
     //printf("%d\n", i);
     if (str[i] == '0')
     {
-        p = ft_width_precision(str, i, holder);
+        p = ft_width_precision_flag(str, i, holder);
     }
     i = *holder;
     //printf("%d\n", i);

@@ -35,22 +35,22 @@ int		ft_printf(const char *s, ...)
 			if (s[i] == '0')
 			{
 				p = ft_flagzero((char *)s, i, &i);
-			/*if (s[i] == 'c')
-				ft_putchar_fd(va_arg(list, int), 1);
-			if (s[i] == 's')
-				ft_putstr_fd(va_arg(list, char *), 1);
+				/*if (s[i] == 'c')
+					ft_putchar_fd(va_arg(list, int), 1);
+				if (s[i] == 's')
+					ft_putstr_fd(va_arg(list, char *), 1);
 				*/
 				if (s[i] == 'd' || str[i] == 'i')
 					ft_precision_flag(ft_itoa(va_arg(list, int)), p);
-				if (s[i] == 'u')
+				else if (s[i] == 'u')
 					ft_precision_flag(ft_itoa(va_arg(list, unsigned int)), p);
-				if (s[i] == 'x')
+				else if (s[i] == 'x')
 					ft_precision_flag(ft_hex(va_arg(list, long long)), p);
-				if (s[i] == 'X')
+				else if (s[i] == 'X')
 					ft_precision_flag(ft_upper(ft_hex(va_arg(list, long long))), p);	
-				if (s[i] == 'p')	
+				else if (s[i] == 'p')	
 					ft_precision_flag(ft_strjoin("0x", ft_hex(va_arg(list, long long))), p);
-					i++;
+				i++;
 			}
 			if (s[i] == '.')
 				i++;
@@ -58,23 +58,21 @@ int		ft_printf(const char *s, ...)
 				p = ft_width_precision(str, i, &i);
 			if (s[i] == 'c')
 				ft_putchar_fd(va_arg(list, int), 1);
-			if (s[i] == 's')
+			else if (s[i] == 's')
 				ft_putstr_fd(va_arg(list, char *), 1);
-			if (s[i] == 'd' || str[i] == 'i')
+			else if (s[i] == 'd' || str[i] == 'i')
 				ft_precision(ft_itoa(va_arg(list, int)), p);
-			if (s[i] == 'u')
+			else if (s[i] == 'u')
 				ft_putstr_fd(ft_itoa(va_arg(list, unsigned int)), 1);
-			if (s[i] == 'x')
+			else if (s[i] == 'x')
 				ft_putstr_fd(ft_hex(va_arg(list, long long)), 1);
-			if (s[i] == 'X')
+			else if (s[i] == 'X')
 				ft_putstr_fd(ft_upper(ft_hex(va_arg(list, long long))), 1);	
-			if (s[i] == 'p')	
+			else if (s[i] == 'p')	
 				ft_putstr_fd(ft_strjoin("0x", ft_hex(va_arg(list, long long))), 1);
-		
 		}
-		if (s[i] != '%')
+		if (!ft_strnstr(s + i, "cspdiuxX%", 1))
 			ft_putchar_fd(s[i], 1);
-
 		i++;
 	}
 	va_end(list);
