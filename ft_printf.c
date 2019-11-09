@@ -23,25 +23,24 @@ void	ft_precision(char *str, char *p, int flag)
 	i = 0;
 	j = 0;
 	s_len = ft_strlen(str);
+	if (!p)
+		ft_strdup("");
 	len = ft_strlen(p);
-	//printf("flaf : %d\n", flag);
+	//printf("%s\n", str + i);
+	//printf("flag : %d\n", flag);
+	//printf("%s\n", str);
 	if (flag == 1)
 	{
-		if (len != 0 && s_len > len)
+		if (s_len > len && len >= 0)
 			ft_putstr_fd(str, 1);
-		else if (len >= s_len)
+		else if (len > s_len)
 		{
-			i = len - s_len;
-			p = ft_substr(str, s_len, len);
-			ft_putstr_fd(p, 1);
-		}
-	}
-	else if (flag == 0)
-	{
-		if (len != 0)
-			ft_putstr_fd(str, 1);
-		else
-		{
+			if (str[i] == '-')
+			{
+				ft_putchar_fd('-', 1);
+				i++;
+				j++;
+			}
 			i = len - s_len;
 			while (i < len)
 			{
@@ -49,7 +48,19 @@ void	ft_precision(char *str, char *p, int flag)
 				i++;
 				j++;
 			}
-		ft_putstr_fd(p, 1);
+			p[i] = '\0';
+			ft_putstr_fd(p, 1);
+		}
+	}
+	else if (flag == 0)
+	{
+		if (s_len >= len)
+			ft_putstr_fd(str, 1);
+		else if (len > s_len)
+		{
+			i = len - s_len;
+			p = ft_substr(str, 0, i);
+			ft_putstr_fd(p, 1);
 		}
 	}
 }
