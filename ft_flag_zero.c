@@ -33,8 +33,6 @@ int         ft_handle_width(char *p, int width)
 
 	len = ft_strlen(p) - 1;
 	cpt = len;
-	if (width != 0)
-	{
 	if (width < len)
 		ft_putstr_fd(p, 1);
 	else
@@ -52,7 +50,6 @@ int         ft_handle_width(char *p, int width)
 			cpt++;
 		}
 		ft_putstr_fd(p, 1);
-	}
 	}
 	return (cpt);
 }

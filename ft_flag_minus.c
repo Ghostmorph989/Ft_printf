@@ -35,7 +35,7 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 	while (ft_isdigit(s[*pos]))
 		*pos += 1;
 	p = ft_checkparam(*(s + *pos), list);
-	len = ft_strlen(p) - 1;
+	len = ft_strlen(p);
 	if (precision == 0)
 		ft_putstr_fd(p, 1);
 	else if (width < precision)

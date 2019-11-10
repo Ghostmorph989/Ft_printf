@@ -38,7 +38,7 @@ int			ft_printf(const char *s, ...)
 				cpt = ft_flag_minus(s, &i, list);
 				i++;
 			}
-			else if (ft_isdigit(s[i]))
+			if (ft_isdigit(s[i]) || s[i] == '.')
 			{
 				cpt = ft_width_precision(s, &i, list);
 				i++;
