@@ -44,7 +44,10 @@ int			ft_printf(const char *s, ...)
 				i++;
 			}
 			else
+			{
 				ft_printfparam(s[i], list);
+				i++;
+			}
 		}
 		if (!ft_strnstr(s + i, "cspdiuxX%", 1))
 			ft_putchar_fd(s[i], 1);
