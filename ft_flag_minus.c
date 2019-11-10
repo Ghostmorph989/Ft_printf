@@ -38,7 +38,7 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 	len = ft_strlen(p) - 1;
 	if (precision == 0)
 		ft_putstr_fd(p, 1);
-	else
+	else if (width < precision)
 	{
 		if (p[0] == '-')
 		{
@@ -46,6 +46,23 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 			p[0] = '0';
 			cpt++;
 			width--;
+			//p = p + 1;
+		}
+		while (--precision > len)
+		{
+			ft_putchar_fd('0', 1);
+			cpt++;
+			width--;
+		}
+		ft_putstr_fd(p, 1);
+	}
+	else
+	{
+		if (p[0] == '-')
+		{
+			ft_putchar_fd('-', 1);
+			cpt++;
+			p = p + 1;
 		}
 		while (--precision > len)
 		{

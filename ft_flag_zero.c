@@ -62,12 +62,16 @@ int         ft_handle_width_precision(char *p, int width, int precision)
 	int cpt;
 	int len;
 
-	len = ft_strlen(p) - 1;
+	len = ft_strlen(p);
 	cpt = len;
-	if (width > precision)
+	printf("%zu\n", ft_strlen(p));
+	if (width >= precision)
 	{
 		if (width < len)
+		{
 			ft_putstr_fd(p, 1);
+			return (len);
+		}
 		else
 		{
 			while (--width > precision)
@@ -77,18 +81,36 @@ int         ft_handle_width_precision(char *p, int width, int precision)
 			}
 		}
 	}
+	if (precision > width)
+	{
 	if (p[0] == '-')
 	{
 		ft_putchar_fd('-', 1);
 		p[0] = '0';
 		cpt++;
 	}
-	while (--precision > len)
+	while (precision-- > len)
 	{
 		ft_putchar_fd('0', 1);
 		cpt++;
 	}
 	ft_putstr_fd(p, 1);
+	}
+	else
+	{
+	if (p[0] == '-')
+	{
+		ft_putchar_fd('-', 1);
+		p[0] = '0';
+		cpt++;
+	}
+	while (precision-- > len)
+	{
+		ft_putchar_fd('0', 1);
+		cpt++;
+	}
+	ft_putstr_fd(p, 1);
+	}
 	return (cpt);
 }
 
@@ -111,7 +133,7 @@ int        ft_flag_zero(const char *s, int *pos, va_list list)
     p = ft_checkparam(*(s + *pos), list);
 	if (precision == 0)
 		cpt = ft_handle_width(p, width);
-	else
+	else if (precision && width)
 		cpt = ft_handle_width_precision(p, width, precision);
 	free(p);
 	return (cpt + ft_strlen(s));
