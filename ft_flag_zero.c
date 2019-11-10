@@ -31,7 +31,7 @@ int         ft_handle_width(char *p, int width)
 	int len;
 	int cpt;
 
-	len = ft_strlen(p) - 1;
+	len = ft_strlen(p);
 	cpt = len;
 	if (width < len)
 		ft_putstr_fd(p, 1);
@@ -44,7 +44,7 @@ int         ft_handle_width(char *p, int width)
 			width--;
 			cpt++;
 		}
-		while (width-- && width > len)
+		while (width-- > len)
 		{
 			ft_putchar_fd('0', 1);
 			cpt++;
@@ -61,7 +61,6 @@ int         ft_handle_width_precision(char *p, int width, int precision)
 
 	len = ft_strlen(p);
 	cpt = len;
-	printf("%zu\n", ft_strlen(p));
 	if (width >= precision)
 	{
 		if (width < len)

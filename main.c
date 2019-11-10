@@ -19,7 +19,7 @@ int		main(void)
 	//printf("/***********************************************\\\n");
 	//printf("Keep your head strong : %015.16d", 42545245);
 	//printf("/***********************************************\\\n");
-	ft_printf("%-4.15d\n", a);
-	printf("%-4.15d\n", a);
+	ft_printf("%0x\n", a);
+	printf("%0x\n", a);
 	return (0);
 }

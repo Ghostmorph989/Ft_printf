@@ -45,7 +45,6 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 			ft_putchar_fd('-', 1);
 			p[0] = '0';
 			cpt++;
-			//p = p + 1;
 		}
 		while (precision-- > len)
 		{

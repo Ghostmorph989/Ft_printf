@@ -34,6 +34,15 @@ void	ft_printfparam(char c, va_list list)
 
 char	*ft_checkparam(char c, va_list list)
 {
+	char p[2];
+	if (c == 'c')
+	{
+		p[0] = va_arg(list, int);
+		p[1] = '\0';
+		return(ft_strdup(p));
+	}
+	else if (c == 's')
+		return (va_arg(list, char *));
 	if (c == 'd' || c == 'i')
 		return (ft_itoa(va_arg(list, int)));
 	else if (c == 'u')
@@ -42,5 +51,7 @@ char	*ft_checkparam(char c, va_list list)
 		return (ft_hex(va_arg(list, long long)));
 	else if (c == 'X')
 		return (ft_upper(ft_hex(va_arg(list, long long))));
+	else if (c == 'p')
+		return (ft_strjoin("0x", ft_hex(va_arg(list, long long))));
 	return (ft_strdup(""));
 }
