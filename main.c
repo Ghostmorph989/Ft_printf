@@ -15,11 +15,11 @@
 
 int		main(void)
 {
-	void *a = "gdfgs";
+	int a = 63456456;
 	//printf("/***********************************************\\\n");
 	//printf("Keep your head strong : %015.16d", 42545245);
 	//printf("/***********************************************\\\n");
-	ft_printf("%p\n", a);
-	printf("%p\n",a );
+	ft_printf(" %-15d\n", a);
+	printf(" %-15d\n",a);
 	return (0);
 }

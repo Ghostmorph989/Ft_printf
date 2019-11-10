@@ -25,33 +25,19 @@ int			ft_printf(const char *s, ...)
 	{
 		if (s[i] == '%')
 		{
+			if (!ft_strnstr(s + i, "cspdiuxX%", 1))
+				ft_printfparam(s[i++], list);
 			if ((s[i] == '%' && s[i + 1] == '%'))
-				ft_putchar_fd(s[i], 1);
-			i++;
-			if (s[i] == '0')
-			{
-				cpt = ft_flag_zero(s, &i, list);
-				i++;
-			}
-			else if (s[i] == '-')
-			{
+				ft_putchar_fd(s[i++], 1);
+			if (s[i] == '-' && s[i + 1] != '-')
 				cpt = ft_flag_minus(s, &i, list);
-				i++;
-			}
-			if (ft_isdigit(s[i]) || s[i] == '.')
-			{
+			else if (s[i] == '0')
+				cpt = ft_flag_zero(s, &i, list);
+			else if (ft_isdigit(s[i]) || s[i] == '.')
 				cpt = ft_width_precision(s, &i, list);
-				i++;
-			}
-			else
-			{
-				ft_printfparam(s[i], list);
-				i++;
-			}
-		}
-		if (!ft_strnstr(s + i, "cspdiuxX%", 1))
-			ft_putchar_fd(s[i], 1);
-		i++;
+			i++;
+		}else
+			ft_putchar_fd(s[i++], 1);
 	}
 	va_end(list);
 	return (cpt);

@@ -108,6 +108,7 @@ int		ft_width_precision(const char *s, int *pos, va_list list)
 	{
 		p = ft_checkparam(*(s + *pos), list);
 		cpt = ft_norm_width(p, width);
+		free(p);
 	}
 	return (cpt);
 }
