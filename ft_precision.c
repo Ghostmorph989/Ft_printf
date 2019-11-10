@@ -68,21 +68,22 @@ void	ft_precision(char *str, char *p)
 		ft_putstr_fd(str, 1);
 	if (p_len > s_len)
 	{
-        while (p[j] != '\0' && (p[j] == ' ' || p[j] == '0'))
-        {
-            if (str[i] == '-' && p[j + 1] == '0')
-            {
-                p[j] = '-';
-                str[i] = '0';
-            }
-            j++;
-        }
+        // while (p[j] != '\0' && (p[j] == ' ' || p[j] == '0'))
+        // {
+        //     if (str[i] == '-' && p[j + 1] == '0')
+        //     {
+        //         p[j] = '-';
+        //     }
+        //     j++;
+        // }
+		// printf("p: %s\n", p);
+		// printf("str : %s\n", str);
 		while (i < s_len)
 		{
 			p[i + p_len - s_len] = str[i];
 			i++;
 		}
-		p[p_len] = '\0';
+		p[p_len + 1] = '\0';
 		ft_putstr_fd(p, 1);
 	}
 }

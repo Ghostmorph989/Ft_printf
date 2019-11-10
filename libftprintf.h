@@ -29,5 +29,7 @@ char        *ft_width_precision_flag(char *str, int i, int *holder);
 char        *ft_width_precision(char *str, int i, int *holder);
 void	    ft_precision_flag(char *str, char *p);
 void	    ft_precision(char *str, char *p);
+int         ft_advanced_isdigit(char *str, int i);
+int         ft_getnum(char *str, int i);
 #endif
 
