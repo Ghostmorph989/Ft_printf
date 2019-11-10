@@ -28,5 +28,8 @@ char        *ft_checkparam(char c, va_list list);
 int         ft_flag_minus(const char *s, int *pos, va_list);
 int         ft_handle_width_precision(char *p, int width, int precision);
 int         ft_handle_width(char *p, int width);
+int		    ft_width_precision(const char *s, int *pos, va_list list);
+int         ft_norm_width(char *p, int width);
+int         ft_norm_width_precision(char *p, int width, int precision);
 #endif
 

@@ -6,7 +6,7 @@
 #    By: malaoui <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 17:35:50 by malaoui           #+#    #+#              #
-#    Updated: 2019/11/07 14:11:46 by malaoui          ###   ########.fr        #
+#    Updated: 2019/11/10 05:38:46 by malaoui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ SRC = ft_printf.c\
 	ft_flag_zero.c\
 	ft_manage_prints.c\
 	ft_flag_minus.c\
-	# ft_precision.c\
-
+	ft_norm.c\
 
 LIB = libft.a
 
@@ -30,11 +29,12 @@ all: $(NAME)
 
 $(NAME):
 	$(GC) $(FLAGS) $(SRC)
-	ar rc $(NAME) $(SRC:.c=.o)
+	ar x $(LIB)
+	ar rc $(NAME) *.o
 	ranlib $(NAME)
 
 clean:
-	rm -f $(SRC:.c=.o)
+	rm -f *.o
 
 fclean: clean
 	rm -f $(NAME)
