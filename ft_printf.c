@@ -6,29 +6,26 @@
 /*   By: malaoui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 05:04:05 by malaoui           #+#    #+#             */
-/*   Updated: 2019/11/10 01:00:29 by malaoui          ###   ########.fr       */
+/*   Updated: 2019/11/10 06:09:41 by malaoui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-
-
-
-int		ft_printf(const char *s, ...)
+int			ft_printf(const char *s, ...)
 {
 	int		i;
-	va_list list;
-	va_start(list, s);
-	int cpt;
+	va_list	list;
+	int		cpt;
 
+	va_start(list, s);
 	i = 0;
 	cpt = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '%')
 		{
-			if (s[i] == '%' && s[i + 1] == '%')
+			if ((s[i] == '%' && s[i + 1] == '%') || (s[i - 1] == '%' && s[i + 1] == '%'))
 				ft_putchar_fd(s[i], 1);
 			i++;
 			if (s[i] == '0')
@@ -47,10 +44,7 @@ int		ft_printf(const char *s, ...)
 				i++;
 			}
 			else
-			{
-				ft_printfparam(s[i], list);
-				i++;
-			}
+				ft_printfparam(s[i++], list);
 		}
 		if (!ft_strnstr(s + i, "cspdiuxX%", 1))
 			ft_putchar_fd(s[i], 1);
