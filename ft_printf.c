@@ -25,7 +25,7 @@ int			ft_printf(const char *s, ...)
 	{
 		if (s[i] == '%')
 		{
-			if ((s[i] == '%' && s[i + 1] == '%') || (s[i - 1] == '%' && s[i] == '%'))
+			if ((s[i] == '%' && s[i + 1] == '%'))
 				ft_putchar_fd(s[i], 1);
 			i++;
 			if (s[i] == '0')
@@ -44,7 +44,7 @@ int			ft_printf(const char *s, ...)
 				i++;
 			}
 			else
-				ft_printfparam(s[i++], list);
+				ft_printfparam(s[i], list);
 		}
 		if (!ft_strnstr(s + i, "cspdiuxX%", 1))
 			ft_putchar_fd(s[i], 1);

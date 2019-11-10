@@ -28,6 +28,8 @@ void	ft_printfparam(char c, va_list list)
 		ft_putstr_fd(ft_upper(ft_hex(va_arg(list, long long))), 1);
 	else if (c == 'p')
 		ft_putstr_fd(ft_strjoin("0x", ft_hex(va_arg(list, long long))), 1);
+	else
+		return ;
 }
 
 char	*ft_checkparam(char c, va_list list)

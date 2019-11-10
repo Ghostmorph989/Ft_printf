@@ -17,33 +17,37 @@ int			ft_norm_width_precision(char *p, int width, int precision)
 	int		cpt;
 	int		len;
 
-	len = ft_strlen(p) - 1;
+	len = ft_strlen(p);
 	cpt = len;
-	if (width > precision)
+	if (width >= precision)
 	{
 		if (width < len)
 			ft_putstr_fd(p, 1);
 		else
 		{
-			while (--width > precision)
+			while (width-- > len)
 			{
 				ft_putchar_fd(' ', 1);
 				cpt++;
 			}
 		}
+		ft_putstr_fd(p, 1);
 	}
-	if (p[0] == '-')
+	else if (width < precision)
 	{
-		ft_putchar_fd('-', 1);
-		p[0] = '0';
-		cpt++;
+		if (p[0] == '-')
+		{
+			ft_putchar_fd('-', 1);
+			cpt++;
+			p[0] = '0';
+		}
+		while (precision-- > len)
+		{
+			ft_putchar_fd('0', 1);
+			cpt++;
+		}
+		ft_putstr_fd(p, 1);
 	}
-	while (--precision > len)
-	{
-		ft_putchar_fd('0', 1);
-		cpt++;
-	}
-	ft_putstr_fd(p, 1);
 	return (cpt);
 }
 

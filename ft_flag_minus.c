@@ -45,10 +45,9 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 			ft_putchar_fd('-', 1);
 			p[0] = '0';
 			cpt++;
-			width--;
 			//p = p + 1;
 		}
-		while (--precision > len)
+		while (precision-- > len)
 		{
 			ft_putchar_fd('0', 1);
 			cpt++;
@@ -62,9 +61,10 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 		{
 			ft_putchar_fd('-', 1);
 			cpt++;
-			p = p + 1;
+			width--;
+			p[0] = '0';
 		}
-		while (--precision > len)
+		while (precision-- > len)
 		{
 			ft_putchar_fd('0', 1);
 			cpt++;
@@ -72,7 +72,7 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 		}
 		ft_putstr_fd(p, 1);
 	}
-	while (--width > len)
+	while (width-- > len)
 		ft_putchar_fd(' ', 1);
 	return (cpt);
 }
