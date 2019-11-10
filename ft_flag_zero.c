@@ -6,84 +6,113 @@
 /*   By: malaoui <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 00:48:07 by malaoui           #+#    #+#             */
-/*   Updated: 2019/11/10 00:48:09 by malaoui          ###   ########.fr       */
+/*   Updated: 2019/11/10 03:49:02 by malaoui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "libftprintf.h"
 
-int         ft_advanced_isdigit(char *str, int i)
+int		ft_numlen(long long nb)
 {
-    while (ft_isdigit(str[i]) && str[i] != '\0')
-            i++;
-        return (i);
+	int i;
+
+	i = 0;
+	while (nb != 0)
+	{
+		i++;
+		nb /= 10;
+	}
+	return (i);
 }
 
-int         ft_getnum(char *str, int i)
+int         ft_handle_width(char *p, int width)
 {
-    return (ft_atoi(str + i));
+	int len;
+	int cpt;
+
+	len = ft_strlen(p) - 1;
+	cpt = len;
+	if (width != 0)
+	{
+	if (width < len)
+		ft_putstr_fd(p, 1);
+	else
+	{
+		if (p[0] == '-')
+		{
+			ft_putchar_fd('-', 1);
+			p[0] = '0';
+			width--;
+			cpt++;
+		}
+		while (width-- && width > len)
+		{
+			ft_putchar_fd('0', 1);
+			cpt++;
+		}
+		ft_putstr_fd(p, 1);
+	}
+	}
+	return (cpt);
 }
 
-char       *ft_fill_flag(int left_v, int right_v)
+int         ft_handle_width_precision(char *p, int width, int precision)
 {
-    char *s;
-    int i;
+	int cpt;
+	int len;
 
-    i = 0;
-    s = NULL;
-    if (right_v >= left_v)
-    {
-        s = (char *)malloc(sizeof(char) * (right_v + 1));
-        s[right_v] = '\0';
-        s = ft_memset(s, '0', right_v);
-    }
-    else if (left_v > right_v)
-    {
-        s = (char *)malloc(sizeof(char) * (left_v + 1));
-        s[left_v] = '\0';
-        s = ft_memset(s, ' ', left_v - right_v);
-        s = ft_memset(s , '0', left_v);
-    }
-    return (s);
+	len = ft_strlen(p) - 1;
+	cpt = len;
+	if (width > precision)
+	{
+		if (width < len)
+			ft_putstr_fd(p, 1);
+		else
+		{
+			while (--width > precision)
+			{
+				ft_putchar_fd(' ', 1);
+				cpt++;
+			}
+		}
+	}
+	if (p[0] == '-')
+	{
+		ft_putchar_fd('-', 1);
+		p[0] = '0';
+		cpt++;
+	}
+	while (--precision > len)
+	{
+		ft_putchar_fd('0', 1);
+		cpt++;
+	}
+	ft_putstr_fd(p, 1);
+	return (cpt);
 }
 
-char        *ft_width_precision_flag(char *str, int i, int *holder)
+int        ft_flag_zero(const char *s, int *pos, va_list list)
 {
-    int     left_v;
-    int     right_v;
-    char    *s;
-    char    *p;
+	int width;
+	int precision;
+	char *p;
+	int cpt;
 
-    left_v = 0;
-    right_v = 0;
-    s = ft_strdup("");;
-    p = ft_strdup("");;
-    left_v = ft_getnum(str, i);
-    //printf("%d\n", left_v);
-    i = ft_advanced_isdigit(str, i);
-    if (str[i] == '.')
-        i++;
-    right_v = ft_getnum(str, i);
-    //printf("%d\n", right_v);
-    i = ft_advanced_isdigit(str, i);
-    p = ft_fill(left_v, right_v);
-    *holder = i;
-    //printf("line = <%s>\n", str + i);
-    return (p);
-}
-
-char        *ft_flagzero(char *str, int i, int *holder)
-{
-    char *p;
-
-    p = ft_strdup("");
-    //printf("%d\n", i);
-    if (str[i] == '0')
-    {
-        p = ft_width_precision_flag(str, i, holder);
-    }
-    i = *holder;
-    //printf("%d\n", i);
-    return (p);
+	cpt = *pos;
+	width = ft_atoi(s + *pos + 1);
+	while (ft_isdigit(s[*pos]))
+		*pos += 1;
+	if (s[*pos] == '.')
+		*pos += 1;
+	precision = ft_atoi(s + *pos);
+	while (ft_isdigit(s[*pos]))
+		*pos += 1;
+    p = ft_checkparam(*(s + *pos), list);
+	if (precision == 0)
+		cpt = ft_handle_width(p, width);
+	else
+		cpt = ft_handle_width_precision(p, width, precision);
+	free(p);
+	return (cpt + ft_strlen(s));
 }

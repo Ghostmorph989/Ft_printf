@@ -15,12 +15,13 @@
 
 int		main(void)
 {
-	int a = -369258147;
+	int a = 1;
+
 
 	//printf("/***********************************************\\\n");
 	//printf("Keep your head strong : %015.16d", 42545245);
 	//printf("/***********************************************\\\n");
-	//ft_printf("Keep your head strong :%40.10s\n", "dfadsf");
-	printf("Keep your head strong :%-16p\n",&a);
+	ft_printf("Keep your mood :%01.8d\n", a);
+	printf("Keep your mood :%01.8d\n", a);
 	return (0);
 }

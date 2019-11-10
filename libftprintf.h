@@ -22,14 +22,11 @@ int			ft_len(long long nb);
 char		*ft_upper(char *str);
 char		*ft_hex(long long nb);
 int			ft_printf(const char *s, ...);
-char        *ft_flagzero(char *str, int i, int *holder);
-char        *ft_fill_flag(int left_v, int right_v);
-char        *ft_fill(int left_v, int right_v);
-char        *ft_width_precision_flag(char *str, int i, int *holder);
-char        *ft_width_precision(char *str, int i, int *holder);
-void	    ft_precision_flag(char *str, char *p);
-void	    ft_precision(char *str, char *p);
-int         ft_advanced_isdigit(char *str, int i);
-int         ft_getnum(char *str, int i);
+void	    ft_printfparam(char c, va_list list);
+int         ft_flag_zero(const char *s, int *pos, va_list list);
+char        *ft_checkparam(char c, va_list list);
+int         ft_flag_minus(const char *s, int *pos, va_list);
+int         ft_handle_width_precision(char *p, int width, int precision);
+int         ft_handle_width(char *p, int width);
 #endif
 
