@@ -25,9 +25,14 @@ int			ft_norm_width_precision(char *p, int width, int precision)
 			ft_putstr_fd(p, 1);
 		else
 		{
-			while (width-- > len)
+			while (width-- > precision)
 			{
 				ft_putchar_fd(' ', 1);
+				cpt++;
+			}
+			while (precision-- > len)
+			{
+				ft_putchar_fd('0', 1);
 				cpt++;
 			}
 		}
@@ -107,6 +112,7 @@ int		ft_width_precision(const char *s, int *pos, va_list list)
 	else
 	{
 		p = ft_checkparam(*(s + *pos), list);
+		p[precision] = '\0';
 		cpt = ft_norm_width(p, width);
 		free(p);
 	}

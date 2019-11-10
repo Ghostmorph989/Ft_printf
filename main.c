@@ -15,11 +15,18 @@
 
 int		main(void)
 {
-	int a = 63456456;
+	int a = 1;//63456456;
 	//printf("/***********************************************\\\n");
 	//printf("Keep your head strong : %015.16d", 42545245);
 	//printf("/***********************************************\\\n");
-	ft_printf(" %-15d\n", a);
-	printf(" %-15d\n",a);
+	// ft_printf(" %-0100.25d\n", a);
+	// printf(" %-0100.25d\n",a);	
+	
+	// ft_printf(" %10.100d\n", a);
+	// printf(" %10.100d\n",a);
+
+	
+	ft_printf("<%100.0c>\n", a);
+	printf("<%100.0c>\n",a);
 	return (0);
 }

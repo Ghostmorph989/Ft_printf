@@ -25,7 +25,7 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 	precision = 0;
 	*pos += 1;
 	if (s[*pos] == '0')
-		return (ft_flag_zero(s, pos, list));
+		*pos += 1;
 	width = ft_atoi(s + *pos);
 	while (ft_isdigit(s[*pos]))
 		*pos += 1;
