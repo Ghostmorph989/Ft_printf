@@ -36,9 +36,14 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 		*pos += 1;
 	p = ft_checkparam(*(s + *pos), list);
 	len = ft_strlen(p);
-	if (precision == 0)
-		ft_putstr_fd(p, 1);
-	else if (width < precision)
+	if (precision == 0 && ft_atoi(p) != 0)
+	 	ft_putstr_fd(p, 1);
+	if (precision == 0 && ft_atoi(p) == 0 && width > 1)
+	{
+	 	ft_putchar_fd(' ', 1);
+		width--;
+	}
+	if (width <= precision && width > 0)
 	{
 		if (p[0] == '-')
 		{
@@ -69,7 +74,10 @@ int			ft_flag_minus(const char *s, int *pos, va_list list)
 			cpt++;
 			width--;
 		}
-		ft_putstr_fd(p, 1);
+		if (cpt >= 1)
+			ft_putstr_fd(p, 1);
+		else if (width > 0)
+			ft_putchar_fd(' ', 1);
 	}
 	while (width-- > len)
 		ft_putchar_fd(' ', 1);

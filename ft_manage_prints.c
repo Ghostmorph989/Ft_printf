@@ -33,12 +33,14 @@ void	ft_printfparam(char c, va_list list)
 char	*ft_checkparam(char c, va_list list)
 {
 	char p[2];
+	int a;
+
 	if (c == 'c')
 	{
-		if (va_arg(list, int) == 0)
-			p[0] = '\0';
-		else
-			p[0] = va_arg(list, int);
+		a = va_arg(list, int);
+		printf("%d\n", a);
+		//p[0] = ' ';
+		p[0] = a;
 		p[1] = '\0';
 		return(ft_strdup(p));
 	}

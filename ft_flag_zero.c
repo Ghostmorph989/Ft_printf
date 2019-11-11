@@ -46,10 +46,13 @@ int         ft_handle_width(char *p, int width)
 		}
 		while (width-- > len)
 		{
-			ft_putchar_fd('0', 1);
+			ft_putchar_fd(' ', 1);
 			cpt++;
 		}
-		ft_putstr_fd(p, 1);
+		if (ft_atoi(p) != 0)
+			ft_putstr_fd(p, 1);
+		else
+			ft_putchar_fd(' ', 1);
 	}
 	return (cpt);
 }
@@ -70,7 +73,7 @@ int         ft_handle_width_precision(char *p, int width, int precision)
 		}
 		else
 		{
-			while (--width > precision)
+			while (width-- > precision)
 			{
 				ft_putchar_fd(' ', 1);
 				cpt++;

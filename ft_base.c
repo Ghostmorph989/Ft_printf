@@ -58,7 +58,7 @@ char	*ft_upper(char *str)
 	return (str);
 }
 
-char	*ft_hex(long long nb)
+char	*ft_hex(unsigned long long nb)
 {
 	int			i;
 	int			j;

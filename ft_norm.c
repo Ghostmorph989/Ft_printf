@@ -81,7 +81,10 @@ int			ft_norm_width(char *p, int width)
 				width--;
 				cpt++;
 			}
+		if (ft_atoi(p) != 0)
 			ft_putstr_fd(p, 1);
+		else
+			ft_putchar_fd(' ', 1);
 		}
 	}
 	return (cpt);
@@ -95,12 +98,21 @@ int		ft_width_precision(const char *s, int *pos, va_list list)
 
 	p = ft_strdup("");
 	cpt = *pos;
-	width = ft_atoi(s + *pos);
+	if (s[*pos] == 42)
+	{
+		width = va_arg(list, int);
+		*pos += 1;
+	}
+	else
+		width = ft_atoi(s + *pos);
 	while (ft_isdigit(s[*pos]))
 		*pos += 1;
 	if (s[*pos] == '.')
 		*pos += 1;
-	precision = ft_atoi(s + *pos);
+	if (s[*pos] == 42)
+		precision = va_arg(list, int);
+	else
+		precision = ft_atoi(s + *pos);
 	while (ft_isdigit(s[*pos]))
 		*pos += 1;
 	if (precision != 0)
@@ -112,7 +124,6 @@ int		ft_width_precision(const char *s, int *pos, va_list list)
 	else
 	{
 		p = ft_checkparam(*(s + *pos), list);
-		p[precision] = '\0';
 		cpt = ft_norm_width(p, width);
 		free(p);
 	}

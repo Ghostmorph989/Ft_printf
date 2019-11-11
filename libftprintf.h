@@ -20,7 +20,7 @@
 char		*ft_strrev(char *str);
 int			ft_len(long long nb);
 char		*ft_upper(char *str);
-char		*ft_hex(long long nb);
+char		*ft_hex(unsigned long long nb);
 int			ft_printf(const char *s, ...);
 void		ft_printfparam(char c, va_list list);
 int			ft_flag_zero(const char *s, int *pos, va_list list);
